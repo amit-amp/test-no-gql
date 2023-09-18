@@ -1,5 +1,5 @@
 datasource db {
-  provider = "sqlserver"
+  provider = "postgresql"
   url      = env("DB_URL")
 }
 
@@ -14,9 +14,9 @@ model Order {
   quantity   Int?
   discount   Float?
   totalPrice Int?
-  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  customer   Customer? @relation(fields: [customerId], references: [id])
   customerId String?
-  product    Product?  @relation(fields: [productId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  product    Product?  @relation(fields: [productId], references: [id])
   productId  String?
 }
 
@@ -29,7 +29,7 @@ model Customer {
   email     String?
   phone     String?
   orders    Order[]
-  address   Address? @relation(fields: [addressId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  address   Address? @relation(fields: [addressId], references: [id])
   addressId String?
 }
 
